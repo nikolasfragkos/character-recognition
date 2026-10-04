@@ -1,0 +1,80 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handwritten Character Recognition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="help-container">
+        <div class="help-icon">?</div>
+        <div class="help-tooltip">
+            <strong>Shortcuts:</strong>
+            <ul>
+                <li><span>P</span> - Predict</li>
+                <li><span>C</span> - Clear Canvas</li>
+                <li><span>Ctrl + Z</span> - Undo</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-wrapper">
+        <!-- Main Content Container -->
+        <div class="container">
+            <h1 class="anim-load anim-delay-1">Handwritten Character Recognition</h1>
+            <p class="anim-load anim-delay-2">Draw a single digit or letter and press 'P' to predict.</p>
+
+            <div class="canvas-wrapper anim-load anim-delay-3">
+                <canvas id="drawing-canvas" width="300" height="300"></canvas>
+                <div class="loader-overlay">
+                    <div class="ripple-node"></div>
+                    <div class="ripple-node"></div>
+                    <div class="ripple-node"></div>
+                </div>
+                <!-- NEW: The overlay for the smooth clear effect -->
+                <div class="clear-overlay"></div>
+            </div>
+
+            <div class="controls anim-load anim-delay-4">
+                <button id="predict-btn">✨ Predict (P)</button>
+                <button id="clear-btn">🧹 Clear (C)</button>
+            </div>
+
+            <div id="result-container">
+                <h2>Prediction: <span id="prediction-result">-</span></h2>
+                <h3>Confidence: <span id="confidence-result">-</span></h3>
+            </div>
+        </div>
+
+        <!-- NEW: Right Side Color Chart -->
+        <div class="color-chart-sidebar anim-load anim-delay-5" id="color-chart-sidebar">
+            <h3>Confidence Legend</h3>
+            <div id="color-chart-container" class="color-chart-container">
+                <div class="chart-row">
+                    <div class="color-swatch very-high"></div>
+                    <span>> 90% (High Confidence)</span>
+                </div>
+                <div class="chart-row">
+                    <div class="color-swatch high"></div>
+                    <span>70-90% (Good Confidence)</span>
+                </div>
+                <div class="chart-row">
+                    <div class="color-swatch mid"></div>
+                    <span>50-70% (Medium Confidence)</span>
+                </div>
+                <div class="chart-row">
+                    <div class="color-swatch low"></div>
+                    <span>< 50% (Low Confidence)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
